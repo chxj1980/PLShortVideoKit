@@ -10,6 +10,7 @@
 #import "MovieTransCodeViewController.h"
 #import "PLShortVideoKit/PLShortVideoKit.h"
 #import "PLSRateButtonView.h"
+#import "ClipMovieViewController.h"
 
 #define PLS_RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
@@ -589,31 +590,21 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // 视频选择器视图中视频的选取数目可以做限制的，限制为1个、多个、不限
     if (self.urls.count > 0) {
-        if (self.urls.count == 1) {
-            MovieTransCodeViewController *transCodeViewController = [[MovieTransCodeViewController alloc] init];
-            transCodeViewController.url = self.urls[0];
-            [self presentViewController:transCodeViewController animated:YES completion:nil];
-        }
-        else {
             [self loadActivityIndicatorView];
 
             __weak typeof(self)weakSelf = self;
             self.movieComposer = [[PLSMovieComposer alloc] initWithUrls:self.urls];
-            if (self.isMovieLandscapeOrientation) {
-                self.movieComposer.videoSize = CGSizeMake(854, 480);
-            } else {
-                self.movieComposer.videoSize = CGSizeMake(480, 854);
-            }
-            
+            self.movieComposer.outputFilePreset = PLSFilePreset960x540;
+        
             [self.movieComposer setCompletionBlock:^(NSURL *url) {
                 NSLog(@"movieComposer ur: %@", url);
 
                 [weakSelf removeActivityIndicatorView];
                 weakSelf.progressLabel.text = @"";
                 
-                MovieTransCodeViewController *transCodeViewController = [[MovieTransCodeViewController alloc] init];
-                transCodeViewController.url = url;
-                [weakSelf presentViewController:transCodeViewController animated:YES completion:nil];
+                ClipMovieViewController *clipMovieViewController = [[ClipMovieViewController alloc] init];
+                clipMovieViewController.url = url;
+                [weakSelf presentViewController:clipMovieViewController animated:YES completion:nil];
             }];
             [self.movieComposer setFailureBlock:^(NSError *error) {
                 NSLog(@"movieComposer failed");
@@ -629,7 +620,6 @@ static NSString * const reuseIdentifier = @"Cell";
             }];
             
             [self.movieComposer startComposing];
-        }
     }
 }
 
