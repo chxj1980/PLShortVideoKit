@@ -10,6 +10,7 @@
 #import "MovieTransCodeViewController.h"
 #import "PLShortVideoKit/PLShortVideoKit.h"
 #import "PLSRateButtonView.h"
+#import "ClipMovieViewController.h"
 
 #define PLS_RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
@@ -580,6 +581,14 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark -- 下一步
 - (void)nextButtonClick:(UIButton *)sender {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0366" ofType:@"mp4"];
+    NSURL *URL = [NSURL fileURLWithPath:filePath];
+    
+    ClipMovieViewController *clipMovieViewController = [[ClipMovieViewController alloc] init];
+    clipMovieViewController.url = URL;
+    [self presentViewController:clipMovieViewController animated:YES completion:nil];
+    
+    /*
     [self.urls removeAllObjects];
     
     for (PHAsset *asset in self.dynamicScrollView.selectedAssets) {
@@ -631,6 +640,7 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.movieComposer startComposing];
         }
     }
+     */
 }
 
 // 加载拼接视频的动画
