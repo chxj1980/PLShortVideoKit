@@ -436,6 +436,15 @@
 		0ACE7C391ED8B072002FF4C9 /* PLSProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACE7C321ED8B072002FF4C9 /* PLSProgressBar.m */; };
 		0ACE7C3A1ED8B072002FF4C9 /* UIImage+PLSClip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACE7C341ED8B072002FF4C9 /* UIImage+PLSClip.m */; };
 		0AD7D3151EA329A400144411 /* btn_record_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7D3141EA329A400144411 /* btn_record_a.png */; };
+		0ADCCC65209C041800BC114A /* ViewRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCCC64209C041800BC114A /* ViewRecordViewController.m */; };
+		0ADCCC6A209C04B500BC114A /* gif2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC66209C04B300BC114A /* gif2.gif */; };
+		0ADCCC6B209C04B500BC114A /* gif3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC67209C04B300BC114A /* gif3.gif */; };
+		0ADCCC6C209C04B500BC114A /* gif1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC68209C04B300BC114A /* gif1.gif */; };
+		0ADCCC6D209C04B500BC114A /* gif4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC69209C04B400BC114A /* gif4.gif */; };
+		0ADCCC72209C04DD00BC114A /* 清新鸟鸣音效.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC6E209C04DC00BC114A /* 清新鸟鸣音效.m4r */; };
+		0ADCCC73209C04DD00BC114A /* 跳动旋律音效.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC6F209C04DC00BC114A /* 跳动旋律音效.m4r */; };
+		0ADCCC74209C04DD00BC114A /* 天使简约音效.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC70209C04DD00BC114A /* 天使简约音效.m4r */; };
+		0ADCCC75209C04DD00BC114A /* 古代韵味音效.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 0ADCCC71209C04DD00BC114A /* 古代韵味音效.m4r */; };
 		0AE538951FB2294700DDF5B9 /* rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE538931FB2294700DDF5B9 /* rotate.png */; };
 		0AE85A5D1EE6F5E900EE8E6D /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE85A5C1EE6F5E900EE8E6D /* music.png */; };
 		0AE8AC951F063E3E006166E2 /* PLSClipAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8AC941F063E3E006166E2 /* PLSClipAudioView.m */; };
@@ -1183,6 +1192,16 @@
 		0ACE7C331ED8B072002FF4C9 /* UIImage+PLSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PLSClip.h"; sourceTree = "<group>"; };
 		0ACE7C341ED8B072002FF4C9 /* UIImage+PLSClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PLSClip.m"; sourceTree = "<group>"; };
 		0AD7D3141EA329A400144411 /* btn_record_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_record_a.png; path = images/btn_record_a.png; sourceTree = "<group>"; };
+		0ADCCC63209C041800BC114A /* ViewRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewRecordViewController.h; sourceTree = "<group>"; };
+		0ADCCC64209C041800BC114A /* ViewRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewRecordViewController.m; sourceTree = "<group>"; };
+		0ADCCC66209C04B300BC114A /* gif2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gif2.gif; path = images/gif2.gif; sourceTree = "<group>"; };
+		0ADCCC67209C04B300BC114A /* gif3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gif3.gif; path = images/gif3.gif; sourceTree = "<group>"; };
+		0ADCCC68209C04B300BC114A /* gif1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gif1.gif; path = images/gif1.gif; sourceTree = "<group>"; };
+		0ADCCC69209C04B400BC114A /* gif4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gif4.gif; path = images/gif4.gif; sourceTree = "<group>"; };
+		0ADCCC6E209C04DC00BC114A /* 清新鸟鸣音效.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; name = "清新鸟鸣音效.m4r"; path = "musics/清新鸟鸣音效.m4r"; sourceTree = "<group>"; };
+		0ADCCC6F209C04DC00BC114A /* 跳动旋律音效.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; name = "跳动旋律音效.m4r"; path = "musics/跳动旋律音效.m4r"; sourceTree = "<group>"; };
+		0ADCCC70209C04DD00BC114A /* 天使简约音效.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; name = "天使简约音效.m4r"; path = "musics/天使简约音效.m4r"; sourceTree = "<group>"; };
+		0ADCCC71209C04DD00BC114A /* 古代韵味音效.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; name = "古代韵味音效.m4r"; path = "musics/古代韵味音效.m4r"; sourceTree = "<group>"; };
 		0AE538931FB2294700DDF5B9 /* rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rotate.png; path = images/rotate.png; sourceTree = "<group>"; };
 		0AE85A5C1EE6F5E900EE8E6D /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music.png; path = images/music.png; sourceTree = "<group>"; };
 		0AE8AC931F063E3E006166E2 /* PLSClipAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSClipAudioView.h; sourceTree = "<group>"; };
@@ -2055,6 +2074,8 @@
 				C3A791461FA077D800C3F2D6 /* ARWebViewController.m */,
 				0A398F6A1ED6259000996229 /* PhotoAlbumViewController.h */,
 				0A398F6B1ED6259000996229 /* PhotoAlbumViewController.m */,
+				0ADCCC63209C041800BC114A /* ViewRecordViewController.h */,
+				0ADCCC64209C041800BC114A /* ViewRecordViewController.m */,
 				0A6340281F15C9C9005ADF6C /* MovieTransCodeViewController.h */,
 				0A6340291F15C9C9005ADF6C /* MovieTransCodeViewController.m */,
 				766CEB9F205BD85E00F708D7 /* H265MovieViewController.h */,
@@ -2097,6 +2118,14 @@
 				0AF33BFF1F7180D200CCFB42 /* mv3.png */,
 				0AF33C001F7180D200CCFB42 /* mv4.png */,
 				0AF33C011F7180D200CCFB42 /* plsMVs.json */,
+				0ADCCC68209C04B300BC114A /* gif1.gif */,
+				0ADCCC66209C04B300BC114A /* gif2.gif */,
+				0ADCCC67209C04B300BC114A /* gif3.gif */,
+				0ADCCC69209C04B400BC114A /* gif4.gif */,
+				0ADCCC71209C04DD00BC114A /* 古代韵味音效.m4r */,
+				0ADCCC6E209C04DC00BC114A /* 清新鸟鸣音效.m4r */,
+				0ADCCC70209C04DD00BC114A /* 天使简约音效.m4r */,
+				0ADCCC6F209C04DC00BC114A /* 跳动旋律音效.m4r */,
 				0AE8ACA31F065F42006166E2 /* If_I_Had_a_Chicken.m4a */,
 				766CEBA2205BD8CC00F708D7 /* video_draft_test.mp4 */,
 				0A9E5F721FC7E2380002FB8B /* counter-6s.m4a */,
@@ -2449,6 +2478,7 @@
 				0A2387AF2091692800BFE159 /* style_default_btn_back_w @2x.png in Resources */,
 				0A2387DC2091692800BFE159 /* style_default_btn_remove@2x.png in Resources */,
 				0A2387092091692700BFE159 /* style_default_1.11_btn_effect_unselect@3x.png in Resources */,
+				0ADCCC74209C04DD00BC114A /* 天使简约音效.m4r in Resources */,
 				0A23879A2091692800BFE159 /* video_style_default_crop_btn_triangle@3x.png in Resources */,
 				0A0692591E8A3C720035CB7B /* btn_del_a@2x.png in Resources */,
 				0A2387912091692800BFE159 /* style_default_2.0_moviEditor_changeSize@2x.png in Resources */,
@@ -2503,6 +2533,7 @@
 				0A398F9F1ED6698F00996229 /* cut_bar_progress@2x.png in Resources */,
 				0A2387C82091692800BFE159 /* style_default_1.11_btn_back_selected_w@2x.png in Resources */,
 				0A2387402091692800BFE159 /* lsq_filter_thumb_nature_1.jpg in Resources */,
+				0ADCCC72209C04DD00BC114A /* 清新鸟鸣音效.m4r in Resources */,
 				0A2387752091692800BFE159 /* style_default_1.11_btn_filter@3x.png in Resources */,
 				C3FCBFD41F305B70007EBB10 /* btn_no_selected_pic@2x.png in Resources */,
 				0A2387A72091692800BFE159 /* lsq_audio_thumb_oldmovie.jpg in Resources */,
@@ -2510,12 +2541,14 @@
 				0A23871B2091692700BFE159 /* style_default_1.6.0_del_btn_default@3x.png in Resources */,
 				0A2387F22091692800BFE159 /* style_default_1.5.0_btn_beauty@2x.png in Resources */,
 				0A2387BE2091692800BFE159 /* style_default_1.5.0_btn_beauty@3x.png in Resources */,
+				0ADCCC73209C04DD00BC114A /* 跳动旋律音效.m4r in Resources */,
 				0A2387A62091692800BFE159 /* lsq_filter_thumb_TinyTimes.jpg in Resources */,
 				C3A78F9B1F95F61000C3F2D6 /* PostBasic.effect in Resources */,
 				0A2386E82091692700BFE159 /* lsq_filter_thumb_Music.jpg in Resources */,
 				0A398F911ED6628500996229 /* cut_bar_left.png in Resources */,
 				0AF33C081F7180D200CCFB42 /* co.mp4 in Resources */,
 				0A2386E72091692700BFE159 /* video_style_default_btn_sticker_off@3x.png in Resources */,
+				0ADCCC6D209C04B500BC114A /* gif4.gif in Resources */,
 				0A398F931ED6628500996229 /* cut_bar_left@3x.png in Resources */,
 				C3A791401FA076E000C3F2D6 /* back_white.png in Resources */,
 				0A2387982091692800BFE159 /* style_default_1.5.0_btn_mv_bg@3x.jpg in Resources */,
@@ -2567,6 +2600,7 @@
 				0A2387482091692800BFE159 /* style_default_1.6.0_homepage_bg@2x.png in Resources */,
 				0A23876F2091692800BFE159 /* lsq_filter_thumb_Surprise.jpg in Resources */,
 				0A23872D2091692700BFE159 /* style_default_btn_back_selected@2x.png in Resources */,
+				0ADCCC6C209C04B500BC114A /* gif1.gif in Resources */,
 				0A2387802091692800BFE159 /* style_default_1.11_sound_selected@3x.png in Resources */,
 				0A2731FF1E75E36B005D0CE1 /* progressbar_front.png in Resources */,
 				0A2387942091692800BFE159 /* style_default_1.11_btn_filter_unselected@2x.png in Resources */,
@@ -2658,6 +2692,7 @@
 				0A23874D2091692800BFE159 /* style_default_1.11_edit_effect_select@2x.png in Resources */,
 				0A09F0B0201ABE4F00B585D9 /* btn_revocation@2x.png in Resources */,
 				0A0692511E8A3B590035CB7B /* btn_camera_done_b@2x.png in Resources */,
+				0ADCCC6A209C04B500BC114A /* gif2.gif in Resources */,
 				766CEBAE205BD91400F708D7 /* green_quot.png in Resources */,
 				0A2386F32091692700BFE159 /* lsq_filter_thumb_Bubbles.jpg in Resources */,
 				0A23871E2091692700BFE159 /* lsq_filter_thumb_Normal.jpg in Resources */,
@@ -2744,6 +2779,7 @@
 				C3A78F9D1F95F61000C3F2D6 /* Recorder.json in Resources */,
 				0A2387732091692800BFE159 /* style_default_btn_flash_on@3x.png in Resources */,
 				0A2387AB2091692800BFE159 /* style_default_1.6.0_sticker_btn_default@3x.png in Resources */,
+				0ADCCC6B209C04B500BC114A /* gif3.gif in Resources */,
 				0A2387EF2091692800BFE159 /* lsq_filter_thumb_BabyPink001.jpg in Resources */,
 				0A2387702091692800BFE159 /* style_default_btn_back_selected@3x.png in Resources */,
 				0A4F78FD20072B80003E8218 /* btn_play_bg_a@2x.png in Resources */,
@@ -2824,6 +2860,7 @@
 				0A9E5F751FC7F4350002FB8B /* counter-35s.m4a in Resources */,
 				0A2387A02091692800BFE159 /* style_default_1.7.0_nosound@3x.png in Resources */,
 				0A2386F12091692700BFE159 /* style_default_1.11_btn_effect_unselect@2x.png in Resources */,
+				0ADCCC75209C04DD00BC114A /* 古代韵味音效.m4r in Resources */,
 				0A2387C92091692800BFE159 /* style_default_record_btn_record_selected@3x.png in Resources */,
 				0A23878D2091692800BFE159 /* lsq_audio_thumb_lively.jpg in Resources */,
 				C3FCBFD61F305B70007EBB10 /* btn_selected_pic@2x.png in Resources */,
@@ -2982,6 +3019,7 @@
 				0AECA4F21E88466300AF2931 /* PlayViewController.m in Sources */,
 				0A398F701ED625DD00996229 /* ClipMovieViewController.m in Sources */,
 				C3A791371FA06F3A00C3F2D6 /* PLSLoadAnimationView.m in Sources */,
+				0ADCCC65209C041800BC114A /* ViewRecordViewController.m in Sources */,
 				0A238824209170E500BFE159 /* ioapi.c in Sources */,
 				0A238823209170E500BFE159 /* zip.c in Sources */,
 				0A06B0BD1F123299003CA0F6 /* PLSFilterGroup.m in Sources */,

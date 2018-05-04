@@ -58,6 +58,16 @@ PLS_EXPORT NSString *const PLSAudioSettingsKey;
  */
 PLS_EXPORT NSString *const PLSWatermarkSettingsKey;
 
+/*!
+ @constant    PLSOverlayViewKey
+ @abstract    涂鸦、文字、贴图的附着view
+ @discussion
+ 存储的值的类型为 UIView
+ 
+ @since      v1.11.0
+ */
+PLS_EXPORT NSString *const PLSOverlayViewKey;
+
 // ------------------------------------------------------------------
 
 PLS_EXPORT NSString *const PLSURLKey; /* NSURL */

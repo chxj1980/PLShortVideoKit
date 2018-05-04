@@ -54,3 +54,5 @@ FOUNDATION_EXPORT const unsigned char PLShortVideoKitVersionString[];
 #import <PLShortVideoKit/PLSRangeMedia.h>
 #import <PLShortVideoKit/PLSRangeMovieExport.h>
 #import <PLShortVideoKit/PLSRangeMediaTools.h>
+
+#import <PLShortVideoKit/PLSDrawStickerOverlayView.h>

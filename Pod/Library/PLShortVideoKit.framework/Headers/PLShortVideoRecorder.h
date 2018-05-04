@@ -236,6 +236,9 @@
  */
 - (nonnull instancetype)initWithVideoConfiguration:(PLSVideoConfiguration *_Nullable)videoConfiguration audioConfiguration:(PLSAudioConfiguration *_Nullable)audioConfiguration;
 
+- (nonnull instancetype)initWithVideoConfiguration:(PLSVideoConfiguration *_Nullable)videoConfiguration audioConfiguration:(PLSAudioConfiguration *_Nullable)audioConfiguration videoCaptureEnabled:(BOOL)videoCaptureEnabled audioCaptureEnabled:(BOOL)audioCaptureEnabled;
+@property (strong, nonatomic) UIView *_Nullable catpuredView;
+
 /**
  @abstract   初始化方法
  
@@ -362,6 +365,8 @@
  @since      v1.7.0
  */
 - (void)mixAudio:(NSURL *_Nullable)audioURL;
+
+- (void)mixAudio:(NSURL *_Nullable)audioURL playEnable:(BOOL)playEnable;
 
 /**
  @brief   获取添加背景音乐录制完成后的 audioMix
