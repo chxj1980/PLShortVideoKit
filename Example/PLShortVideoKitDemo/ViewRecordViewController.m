@@ -305,6 +305,12 @@ PLShortVideoRecorderDelegate
     if (self.imageIndex >= self.selectedAssets.count) {
         self.imageIndex = 0;
     }
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 2;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    [self.imageView.layer addAnimation:transition forKey:@"imageViewAnimation"];
     self.imageView.image = [self imageURL:self.selectedAssets[self.imageIndex] targetSize:CGSizeMake(544, 960)];
 }
 
