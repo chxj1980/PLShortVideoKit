@@ -11,6 +11,7 @@
 #import "PLSProgressBar.h"
 #import "EditViewController.h"
 #import "PLSRateButtonView.h"
+#import "FLAnimatedImage.h"
 #import "PLShortVideoKit/PLShortVideoKit.h"
 
 #define AlertViewShow(msg) [[[UIAlertView alloc] initWithTitle:@"warning" message:[NSString stringWithFormat:@"%@", msg] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
@@ -24,6 +25,7 @@
 @interface ViewRecordViewController ()
 <
 PLSRateButtonViewDelegate,
+UIWebViewDelegate,
 PLShortVideoRecorderDelegate
 >
 
@@ -36,9 +38,7 @@ PLShortVideoRecorderDelegate
 @property (strong, nonatomic) UIImageView *imageView;
 @property (assign, nonatomic) NSInteger imageIndex;
 @property (strong, nonatomic) NSMutableArray *audioArray;
-@property (strong, nonatomic) UIWebView *gifWebView;
-@property (assign, nonatomic) NSInteger gifIndex;
-@property (strong, nonatomic) NSMutableArray *gifArray;
+@property (strong, nonatomic) FLAnimatedImageView *gifView;
 
 @property (strong, nonatomic) UIView *recordToolboxView;
 @property (strong, nonatomic) UIButton *recordButton;
@@ -97,18 +97,25 @@ PLShortVideoRecorderDelegate
     
     self.imageView = [[UIImageView alloc] init];
     self.imageView.frame = self.movieMakeView.bounds;
-    self.imageView.image = [self imageURL:self.selectedAssets.firstObject targetSize:CGSizeMake(544, 960)];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.hidden = YES;
     [self.movieMakeView addSubview:self.imageView];
     
-    self.gifWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 90, 120)];
-    self.gifWebView.center = self.movieMakeView.center;
-    self.gifWebView.backgroundColor = [UIColor clearColor];
-    self.gifWebView.opaque = NO;
-    self.gifWebView.scalesPageToFit = YES;
-    self.gifWebView.userInteractionEnabled = NO;
-    self.gifWebView.hidden = YES;
-    [self.movieMakeView addSubview:self.gifWebView];
+    self.gifView = [[FLAnimatedImageView alloc] init];
+    self.gifView.frame = self.movieMakeView.bounds;
+    self.gifView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.movieMakeView addSubview:self.gifView];
+
+    if ([self isGif:self.selectedAssets.firstObject]) {
+        self.imageView.hidden = YES;
+        self.gifView.hidden = NO;
+        [self loadGifFromAsset:self.selectedAssets.firstObject];
+        
+    } else {
+        self.imageView.hidden = NO;
+        self.gifView.hidden = YES;
+        self.imageView.image = [self imageFromAsset:self.selectedAssets.firstObject targetSize:CGSizeMake(544, 960)];
+    }
 }
 
 - (void)setupRecordToolboxView {
@@ -189,27 +196,6 @@ PLShortVideoRecorderDelegate
         [self.recordToolboxView addSubview:nextAudioButton];
     }
     
-    // 切换 gif 动图
-    self.gifArray = [[NSMutableArray alloc] init];
-    NSArray *gifNameArray = @[@"gif1", @"gif2", @"gif3", @"gif4", @"关闭gif"];
-    for (int i = 0; i < gifNameArray.count - 1; i++) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:gifNameArray[i] ofType:@"gif"];
-        [self.gifArray addObject:path];
-    }
-    
-    for (int i = 0; i < gifNameArray.count; i++) {
-        UIButton *nextGifButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        nextGifButton.frame = CGRectMake(10, 120 + i * 45, 80, 35);
-        [nextGifButton setTitle:gifNameArray[i] forState:UIControlStateNormal];
-        nextGifButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        nextGifButton.backgroundColor = [UIColor grayColor];
-        nextGifButton.layer.borderWidth = 1.0f;
-        nextGifButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        nextGifButton.tag = 13000 + i;
-        [nextGifButton addTarget:self action:@selector(nextGifButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [self.recordToolboxView addSubview:nextGifButton];
-    }
-    
     // 录制视频的操作按钮
     CGFloat buttonWidth = 80.0f;
     self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -243,7 +229,17 @@ PLShortVideoRecorderDelegate
     [self.recordToolboxView addSubview:self.rateButtonView];
 }
 
-- (UIImage *)imageURL:(PHAsset *)phAsset targetSize:(CGSize)targetSize {
+- (BOOL)isGif:(PHAsset *)phAsset {
+    BOOL isGif = NO;
+    NSString *fileName =[phAsset valueForKey:@"filename"];
+    NSString *fileExtension = [fileName pathExtension];
+    if ([fileExtension isEqualToString:@"GIF"] || [fileExtension isEqualToString:@"gif"]) {
+        isGif = YES;
+    }
+    return isGif;
+}
+
+- (UIImage *)imageFromAsset:(PHAsset *)phAsset targetSize:(CGSize)targetSize {
     __block UIImage *image = nil;
     
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -254,8 +250,33 @@ PLShortVideoRecorderDelegate
     [manager requestImageForAsset:phAsset targetSize:targetSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         image = result;
     }];
-    
+
     return image;
+}
+
+- (void)loadGifFromAsset:(PHAsset *)phAsset {
+    __block NSURL *url = nil;
+    
+    NSArray *resourceList = [PHAssetResource assetResourcesForAsset:phAsset];
+    [resourceList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        PHAssetResource *resource = obj;
+        PHAssetResourceRequestOptions *option = [[PHAssetResourceRequestOptions alloc]init];
+        option.networkAccessAllowed = YES;
+        if ([resource.uniformTypeIdentifier isEqualToString:@"com.compuserve.gif"]) {
+            NSLog(@"gif");
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *imageFilePath = [path stringByAppendingPathComponent:resource.originalFilename];
+            [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resource toFile:[NSURL fileURLWithPath:imageFilePath]  options:option completionHandler:^(NSError * _Nullable error) {
+                url = [NSURL fileURLWithPath:imageFilePath];
+                
+                FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:url]];
+                self.gifView.animatedImage = image;
+            }];
+            
+        } else {
+            NSLog(@"jepg");
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -306,12 +327,24 @@ PLShortVideoRecorderDelegate
         self.imageIndex = 0;
     }
     
-    CATransition *transition = [CATransition animation];
-    transition.duration = 2;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionFade;
-    [self.imageView.layer addAnimation:transition forKey:@"imageViewAnimation"];
-    self.imageView.image = [self imageURL:self.selectedAssets[self.imageIndex] targetSize:CGSizeMake(544, 960)];
+    if ([self isGif:self.selectedAssets[self.imageIndex]]) {
+        self.imageView.hidden = YES;
+        self.gifView.hidden = NO;
+
+        [self loadGifFromAsset:self.selectedAssets[self.imageIndex]];
+
+    } else {
+        self.imageView.hidden = NO;
+        self.gifView.hidden = YES;
+        self.gifView.animatedImage = nil; // 停止 GIF 动画
+
+        CATransition *transition = [CATransition animation];
+        transition.duration = 2;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.imageView.layer addAnimation:transition forKey:@"imageViewAnimation"];
+        self.imageView.image = [self imageFromAsset:self.selectedAssets[self.imageIndex] targetSize:CGSizeMake(544, 960)];
+    }
 }
 
 // 下一个音效
@@ -321,32 +354,11 @@ PLShortVideoRecorderDelegate
     
     if (index == self.audioArray.count) {
         [self.shortVideoRecorder mixAudio:nil playEnable:NO];
+        
         return;
     }
     
     [self.shortVideoRecorder mixAudio:[NSURL fileURLWithPath:self.audioArray[index]] playEnable:YES];
-}
-
-// 下一个 gif 图
-- (void)nextGifButtonEvent:(UIButton *)button {
-    NSInteger tag = button.tag;
-    NSInteger index = tag - 13000;
-    
-    if (index == self.gifArray.count) {
-        if (self.gifWebView.loading){
-            [self.gifWebView stopLoading];
-        }
-
-        NSURL *url = [NSURL URLWithString:@""];
-        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-        [self.gifWebView loadRequest:requestObj];
-        
-        self.gifWebView.hidden = YES;
-
-        return;
-    }
-    self.gifWebView.hidden = NO;
-    [self.gifWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.gifArray[index]]]];
 }
 
 // 录制视频
