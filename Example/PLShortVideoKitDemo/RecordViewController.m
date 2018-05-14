@@ -18,11 +18,6 @@
 #import "PLSViewRecorderManager.h"
 #import "PLSRateButtonView.h"
 
-#import "FaceTracker.h"
-#import "KWRenderManager.h"
-#import "Global.h"
-#import "KWUIManager.h"
-#import "EasyarARViewController.h"
 
 #define AlertViewShow(msg) [[[UIAlertView alloc] initWithTitle:@"warning" message:[NSString stringWithFormat:@"%@", msg] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
 
@@ -95,10 +90,6 @@ PLSRateButtonViewDelegate
 // 录制前是否开启自动检测设备方向调整视频拍摄的角度（竖屏、横屏）
 @property (assign, nonatomic) BOOL isUseAutoCheckDeviceOrientationBeforeRecording;
 
-@property (nonatomic, strong) KWUIManager *UIManager;
-@property (nonatomic, strong) KWRenderManager *renderManager;
-@property (nonatomic, copy) NSString *modelPath;
-
 @end
 
 @implementation RecordViewController
@@ -140,14 +131,6 @@ PLSRateButtonViewDelegate
     // --------------------------
     // 通过手势切换滤镜
     [self setupGestureRecognizer];
-    
-    // --------------------------
-    [self setUpEasyarSDKARButton];
-
-    // --------------------------
-    [self setupRenderManager];
-    [self setupKiwiFaceUI];
-    // --------------------------
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -184,6 +167,7 @@ PLSRateButtonViewDelegate
     self.shortVideoRecorder.outputFileType = PLSFileTypeMPEG4;
     self.shortVideoRecorder.innerFocusViewShowEnable = YES; // 显示 SDK 内部自带的对焦动画
     self.shortVideoRecorder.previewView.frame = CGRectMake(0, 0, PLS_SCREEN_WIDTH, PLS_SCREEN_HEIGHT);
+    [self.shortVideoRecorder setBeautifyModeOn:YES]; // 打开美颜
     [self.view addSubview:self.shortVideoRecorder.previewView];
     
     // 录制前是否开启自动检测设备方向调整视频拍摄的角度（竖屏、横屏）
@@ -324,6 +308,7 @@ PLSRateButtonViewDelegate
     [beautyFaceButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     beautyFaceButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [beautyFaceButton addTarget:self action:@selector(beautyFaceButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+    beautyFaceButton.selected = YES;
     [self.baseToolboxView addSubview:beautyFaceButton];
     
     // 切换摄像头
@@ -343,25 +328,6 @@ PLSRateButtonViewDelegate
     self.filePathButton.selected = NO;
     self.useSDKInternalPath = YES;
     
-    // 加载草稿视频
-    self.draftButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 300, 46, 46)];
-    self.draftButton.layer.cornerRadius = 23;
-    self.draftButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
-    [self.draftButton setImage:[UIImage imageNamed:@"draft_video"] forState:UIControlStateNormal];
-    self.draftButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-    [self.draftButton addTarget:self action:@selector(draftVideoButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_draftButton];
-    
-    // 是否使用背景音乐
-    self.musicButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 360, 46, 46)];
-    self.musicButton.layer.cornerRadius = 23;
-    self.musicButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
-    [self.musicButton setImage:[UIImage imageNamed:@"music_no_selected"] forState:UIControlStateNormal];
-    [self.musicButton setImage:[UIImage imageNamed:@"music_selected"] forState:UIControlStateSelected];
-    self.musicButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-    [self.musicButton addTarget:self action:@selector(musicButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_musicButton];
-    
     // 拍照
     self.snapshotButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 10, 46, 46)];
     self.snapshotButton.layer.cornerRadius = 23;
@@ -370,6 +336,25 @@ PLSRateButtonViewDelegate
     self.snapshotButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
     [self.snapshotButton addTarget:self action:@selector(snapshotButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_snapshotButton];
+    
+    // 加载草稿视频
+    self.draftButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 70, 46, 46)];
+    self.draftButton.layer.cornerRadius = 23;
+    self.draftButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
+    [self.draftButton setImage:[UIImage imageNamed:@"draft_video"] forState:UIControlStateNormal];
+    self.draftButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+    [self.draftButton addTarget:self action:@selector(draftVideoButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_draftButton];
+    
+    // 是否使用背景音乐
+    self.musicButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 130, 46, 46)];
+    self.musicButton.layer.cornerRadius = 23;
+    self.musicButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
+    [self.musicButton setImage:[UIImage imageNamed:@"music_no_selected"] forState:UIControlStateNormal];
+    [self.musicButton setImage:[UIImage imageNamed:@"music_selected"] forState:UIControlStateSelected];
+    self.musicButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+    [self.musicButton addTarget:self action:@selector(musicButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_musicButton];
     
     // 展示拼接视频的动画
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.view.bounds];
@@ -467,58 +452,6 @@ PLSRateButtonViewDelegate
     importMovieLabel.textAlignment = NSTextAlignmentCenter;
     importMovieLabel.font = [UIFont systemFontOfSize:14.0];
     [self.importMovieView addSubview:importMovieLabel];
-}
-
-#pragma mark - 初始化KiwiFaceSDK
-- (void)setupRenderManager {
-    
-    // 1.创建 KWRenderManager对象,指定models文件路径 若不传则默认路径是KWResource.bundle/models
-    //    self.renderManager = [[KWRenderManager alloc] initWithModelPath:self.modelPath isCameraPositionBack:NO];
-    self.renderManager = [[KWRenderManager alloc] initWithModelPath:nil isCameraPositionBack:YES];
-    
-    // 2.KWSDK鉴权提示
-    if ([KWRenderManager renderInitCode] != 0) {
-        UIAlertView *alertView =
-        [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"KiwiFaceSDK初始化失败,错误码: %d", [KWRenderManager renderInitCode]] message:@"可在FaceTracker.h中查看错误码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        
-        [alertView show];
-        
-        return;
-    }
-    
-    // 3.加载贴纸滤镜
-    [self.renderManager loadRender];
-    
-}
-
-#pragma mark -初始化KiwiFace的演示UI
-- (void)setupKiwiFaceUI{
-    // 1.初始化UIManager
-    self.UIManager = [[KWUIManager alloc] initWithRenderManager:self.renderManager delegate:self superView:self.view];
-    // 2.是否清除原UI
-    self.UIManager.isClearOldUI = NO;
-    
-    // 3.创建内置UI
-    [self.UIManager createUI];
-    /* 横竖屏时更新sdk内置UI 坐标 */
-    [_UIManager resetScreemMode];
-}
-
-#pragma mark - EasyarSDK AR 入口
-- (void)setUpEasyarSDKARButton {
-    UIButton *ARButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 240, 46, 46)];
-    ARButton.layer.cornerRadius = 23;
-    ARButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
-    [ARButton setImage:[UIImage imageNamed:@"easyar_AR"] forState:UIControlStateNormal];
-    ARButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-    [ARButton addTarget:self action:@selector(ARButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:ARButton];
-}
-
-- (void)ARButtonOnClick:(id)sender {
-    EasyarARViewController *easyerARViewController = [[EasyarARViewController alloc]init];
-    [easyerARViewController loadARID:@"287e6520eff14884be463d61efb40ba8"];
-    [self presentViewController:easyerARViewController animated:NO completion:nil];
 }
 
 #pragma mark -- Button event
@@ -898,37 +831,6 @@ PLSRateButtonViewDelegate
         pixelBuffer = [filter process:pixelBuffer];
     }
     
-    UIDeviceOrientation iDeviceOrientation = [[UIDevice currentDevice] orientation];
-    //    BOOL mirrored = !self.kwSdkUI.kwSdk.cameraPositionBack;
-    BOOL mirrored = NO;
-    
-    cv_rotate_type cvMobileRotate;
-    
-    switch (iDeviceOrientation) {
-        case UIDeviceOrientationPortrait:
-            cvMobileRotate = CV_CLOCKWISE_ROTATE_0;
-            break;
-            
-        case UIDeviceOrientationLandscapeLeft:
-            cvMobileRotate = mirrored ?  CV_CLOCKWISE_ROTATE_90: CV_CLOCKWISE_ROTATE_270;
-            break;
-            
-        case UIDeviceOrientationLandscapeRight:
-            cvMobileRotate = mirrored ? CV_CLOCKWISE_ROTATE_270 : CV_CLOCKWISE_ROTATE_90;
-            break;
-            
-        case UIDeviceOrientationPortraitUpsideDown:
-            cvMobileRotate = CV_CLOCKWISE_ROTATE_180;
-            break;
-            
-        default:
-            cvMobileRotate = CV_CLOCKWISE_ROTATE_0;
-            break;
-    }
-    
-    /*********** 视频帧渲染 ***********/
-    [KWRenderManager processPixelBuffer:pixelBuffer];
-    
     return pixelBuffer;
 }
 
@@ -1114,10 +1016,6 @@ PLSRateButtonViewDelegate
     self.alertView = nil;
     
     self.filtersArray = nil;
-    
-    /* 内存释放 */
-    [self.renderManager releaseManager];
-    [self.UIManager releaseManager];
     
     if ([self.activityIndicatorView isAnimating]) {
         [self.activityIndicatorView stopAnimating];

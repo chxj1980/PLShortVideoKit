@@ -20,13 +20,6 @@
 #import "PLSColumnListView.h"
 #import "PLSVideoEditingController.h"
 
-// TuSDK mark
-#import <TuSDK/TuSDK.h>
-#import <TuSDKVideo/TuSDKVideo.h>
-#import "EffectsView.h"
-#import "EffectsTimeLineModel.h"
-#import "SceneEffectTools.h"
-
 
 #define AlertViewShow(msg) [[[UIAlertView alloc] initWithTitle:@"warning" message:[NSString stringWithFormat:@"%@", msg] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -114,34 +107,6 @@ PLSVideoEditingControllerDelegate
 @property (strong, nonatomic) UIButton *playButton;
 // 视频进度条
 @property (strong, nonatomic) UISlider *progressSlider;
-
-// TuSDK mark - 视频总时长，进入页面时，需设置改参数
-@property (assign, nonatomic) CGFloat videoTotalTime;
-
-#pragma mark - TuSDK
-// TuSDK mark
-//滤镜处理类
-@property (nonatomic, strong) TuSDKFilterProcessor *filterProcessor;
-//当前获取的滤镜对象；
-@property (nonatomic, strong) TuSDKFilterWrap *currentFilter;
-// 滤镜列表
-@property (nonatomic, strong) NSArray<NSString *> *videoEffects;
-// 随机色数组
-@property (nonatomic, strong) NSArray<UIColor *> *displayColors;
-// 滤镜栏
-@property (nonatomic, strong) EffectsView *effectsView;
-// 视频处理进度 0~1
-@property (nonatomic, assign) CGFloat videoProgress;
-// 特效添加数组
-@property (nonatomic, strong) NSMutableArray<EffectsTimeLineModel *> *effectsModels;
-// 当前使用的特效model  视频合成时使用
-@property (nonatomic, assign) NSInteger effectsIndex;
-// 当前使用的特效code  视频合成时使用
-@property (nonatomic, copy) NSString *currentCode;
-// 正在切换滤镜 视频合成时使用
-@property (nonatomic, assign) BOOL isSwitching;
-// 将添加的视频特效在之后的预览过程中展现出来
-@property (nonatomic, strong) SceneEffectTools *effectTools;
 
 @end
 
@@ -260,9 +225,6 @@ PLSVideoEditingControllerDelegate
     // 滤镜
     UIImage *coverImage = [self getVideoPreViewImage:self.movieSettings[PLSAssetKey]];
     self.filterGroup = [[PLSFilterGroup alloc] initWithImage:coverImage];
-    
-    // TuSDK mark 视频特效
-    [self setupTuSDKFilter];
 
     // 视频预览
     [self setupPlayToolboxView];
@@ -454,15 +416,6 @@ PLSVideoEditingControllerDelegate
     videoListButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [videoListButton addTarget:self action:@selector(videoListButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
     [buttonScrollView addSubview:videoListButton];
-    
-    // TuSDK mark - 特效按钮
-    UIButton *effectsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    effectsButton.frame = CGRectMake(742, 0, 35, 35);
-    [effectsButton setTitle:@"特效" forState:UIControlStateNormal];
-    [videoListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    effectsButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [effectsButton addTarget:self action:@selector(effectsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [buttonScrollView addSubview:effectsButton];
 
     // 倍数处理
     self.titleArray = @[@"极慢", @"慢", @"正常", @"快", @"极快"];
@@ -574,207 +527,6 @@ PLSVideoEditingControllerDelegate
     [self.videoListView removeFromSuperview];
 }
 
-// TuSDK mark
-#pragma mark -- TuSDK method
-// 设置 TuSDK
-- (void)setupTuSDKFilter {
-    // 视频总时长
-//    self.videoTotalTime = [self.movieSettings[PLSDurationKey] floatValue];
-    self.videoTotalTime = CMTimeGetSeconds(self.shortVideoEditor.timeRange.duration);
-    
-    // TuSDK mark
-    [self initEffectsView];
-    
-    // 传入图像的方向是否为原始朝向(相机采集的原始朝向)，SDK 将依据该属性来调整人脸检测时图片的角度。如果没有对图片进行旋转，则为 YES
-    BOOL isOriginalOrientation = NO;
-    self.filterProcessor = [[TuSDKFilterProcessor alloc] initWithFormatType:kCVPixelFormatType_32BGRA isOriginalOrientation:isOriginalOrientation];
-    [self.filterProcessor setEnableLiveSticker:NO];
-    self.filterProcessor.delegate = self;
-    
-    self.effectTools = [[SceneEffectTools alloc] init];
-    self.effectTools.videoDuration = self.videoTotalTime;
-}
-
-// 初始化TuSDK滤镜选择栏
--(void)initEffectsView {
-    [self initEffectsData];
-    CGFloat filterViewHeight = self.editToolboxView.lsqGetSizeHeight - 35;
-    self.effectsView = [[EffectsView alloc]initWithFrame:CGRectMake(0, self.view.lsqGetSizeHeight - filterViewHeight, self.baseToolboxView.lsqGetSizeWidth, filterViewHeight)];
-    self.effectsView.backgroundColor =  PLS_RGBCOLOR(25, 24, 36);
-    self.effectsView.effectEventDelegate = self;
-    self.effectsView.effectsCode = self.videoEffects;
-    [self.view addSubview:self.effectsView];
-    self.effectsView.hidden = YES;
-    
-    // 撤销特效的按钮
-    UIButton *revocationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    revocationButton.frame = CGRectMake(self.effectsView.lsqGetSizeWidth - 40, 30, 30, 30);
-    [revocationButton setImage:[UIImage imageNamed:@"btn_revocation"] forState:UIControlStateNormal];
-    [revocationButton addTarget:self action:@selector(revocationButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.effectsView addSubview:revocationButton];
-}
-
-// 初始化相关数据
-- (void)initEffectsData {
-    self.videoEffects = @[@"LiveShake01", @"LiveMegrim01", @"EdgeMagic01", @"LiveFancy01_1", @"LiveSoulOut01", @"LiveSignal01"];
-    self.displayColors = [self getRandomColorWithCount:self.videoEffects.count];
-    self.effectsModels = [NSMutableArray new];
-}
-
-// 特效按钮点击事件
-- (void)effectsButtonClick:(UIButton *)btn {
-    self.effectsView.hidden = !self.effectsView.hidden;
-}
-
-// 隐藏特效的视图 view
-- (void)setEffectsViewHidden {
-    self.effectsView.hidden = YES;
-}
-
-// 清除已添加的所有特效
-- (void)clearAllEffectsHistory {
-    [self.effectsView.displayView removeAllSegment];
-    [self.effectsModels removeAllObjects];
-}
-
-// 清除已添加的上一个特效
-- (void)revocationButtonEvent:(UIButton *)button {
-    if (self.shortVideoEditor.isEditing) {
-        [self.shortVideoEditor stopEditing];
-        self.playButton.selected = YES;
-    }
-    
-    [self.effectsView.displayView removeLastSegment];
-    [self.effectsModels removeLastObject];
-    
-    [self.effectTools removeLastEffect];
-}
-
-// 切换滤镜方法
-- (void)switchEffectWithCode:(NSString *)effectCode {
-    [self.filterProcessor switchFilterWithCode:effectCode];
-    self.currentCode = effectCode;
-}
-
-// 重置标志位
-- (void)resetPreviewVideoEffectsMark {
-    [self.filterProcessor switchFilterWithCode:nil];
-}
-
-- (void)resetExportVideoEffectsMark {
-    self.effectsIndex = 0;
-    self.currentCode = nil;
-    [self.filterProcessor switchFilterWithCode:nil];
-}
-
-// 合成时根据时间切换特效的逻辑
-- (void)managerEffectsWithTimestamp:(CMTime)timestamp {
-    CGFloat videoExportProgress = CMTimeGetSeconds(timestamp)/self.videoTotalTime;
-    
-    // TuSDK mark - 特效切换逻辑中，不包含特效覆盖以及时间叠加的判断，如需要此逻辑，可自行修改
-    if (self.effectsIndex < self.effectsModels.count) {
-        EffectsTimeLineModel *effect = self.effectsModels[self.effectsIndex];
-        
-        if (videoExportProgress >= effect.startProgress && self.currentCode != effect.effectsCode) {
-            if (effect.isValid) {
-                [self switchEffectWithCode:effect.effectsCode];
-            }
-        }
-        
-        if (videoExportProgress >= self.effectsModels[self.effectsIndex].endProgress && self.currentCode == effect.effectsCode) {
-            self.effectsIndex ++;
-            
-            if (self.effectsIndex < self.effectsModels.count) {
-                effect =self.effectsModels[self.effectsIndex];
-                
-                if (videoExportProgress >= effect.startProgress && effect.isValid) {
-                    [self switchEffectWithCode:effect.effectsCode];
-                } else {
-                    // 判断是否可直接开始下一个特效
-                    [self switchEffectWithCode:nil];
-                }
-            }else{
-                [self switchEffectWithCode:nil];
-            }
-        }
-    }
-    
-    if (videoExportProgress >= 1) {
-        self.effectsIndex = 0;
-    }
-}
-
-- (NSArray<UIColor *> *)getRandomColorWithCount:(NSInteger)count {
-    NSMutableArray *colorArr = [NSMutableArray new];
-    for (int i = 0; i < count; i++) {
-        UIColor *color = [UIColor colorWithRed:random()%255/255.0 green:random()%255/255.0 blue:random()%255/255.0 alpha:1];
-        [colorArr addObject:color];
-    }
-    return colorArr;
-}
-
-#pragma mark -- TuSDK 特效栏点击代理方法 effectEventDelegate
-#pragma mark -- 开始添加视频特效
-- (void)effectsSelectedWithCode:(NSString *)effectCode {
-    // 启动视频预览
-    [self.shortVideoEditor startEditing];
-    self.playButton.selected = NO;
-    
-    if (self.videoProgress >= 1) {
-        self.videoProgress = 0;
-    }
-    
-    // 开启视频特效处理
-    self.currentCode = effectCode;
-    [self.filterProcessor switchFilterWithCode:effectCode];
-   
-    // 添加记录
-    EffectsTimeLineModel *effectModel = [EffectsTimeLineModel new];
-    effectModel.startProgress = self.videoProgress;
-    effectModel.effectsCode = effectCode;
-    [self.effectsModels addObject:effectModel];
-    
-    // 开始更新特效 UI
-    [self.effectsView.displayView addSegmentViewBeginWithStartLocation:self.videoProgress WithColor:[self.displayColors objectAtIndex:[self.videoEffects indexOfObject:effectCode]]];
-    
-    // begin 和 end 成对调用
-    [self.effectTools addEffectBegin:effectCode withProgress:self.videoProgress];
-}
-
-#pragma mark -- 停止添加视频特效
-- (void)effectsEndWithCode:(NSString *)effectCode {
-    if (self.currentCode) {
-        // 停止视频预览
-        [self.shortVideoEditor stopEditing];
-        self.playButton.selected = YES;
-        
-        // 结束视频特效处理
-        self.currentCode = nil;
-        [self.filterProcessor switchFilterWithCode:nil];
-        
-        // 修改结束时间
-        EffectsTimeLineModel *effectModel = self.effectsModels.lastObject;
-        if (effectModel) {
-            effectModel.endProgress = self.videoProgress;
-        }
-        
-        // 结束更新特效 UI
-        [self.effectsView.displayView addSegmentViewEnd];
-        
-        // begin 和 end 成对调用
-        [self.effectTools addEffectEnd:effectCode withProgress:self.videoProgress];
-    }
-}
-
-#pragma mark -- TuSDKFilterProcessorDelegate
-
-// 滤镜切换的回调
-- (void)onVideoProcessor:(TuSDKFilterProcessor *)processor filterChanged:(TuSDKFilterWrap *)newFilter {
-    // nothing
-    NSLog(@"%s", __func__);
-}
-// TuSDK mark end
-
 // 视频 seek 操作
 - (void)editorSeekEvent:(UISlider *)slider {
     CMTime destTime = CMTimeMake(slider.value * 1e9, 1e9);
@@ -782,8 +534,6 @@ PLSVideoEditingControllerDelegate
     NSLog(@"%s, line: %d, seek to time: %f", __func__, __LINE__, CMTimeGetSeconds(destTime));
     
     [self.shortVideoEditor seekToTime:destTime completionHandler:nil];
-    
-    self.videoProgress = CMTimeGetSeconds(destTime)/self.videoTotalTime;
 }
 
 #pragma mark -- 启动/暂停视频预览
@@ -1123,69 +873,22 @@ PLSVideoEditingControllerDelegate
     //此处可以做美颜/滤镜等处理
 //    NSLog(@"%s, line:%d, timestamp:%f", __FUNCTION__, __LINE__, CMTimeGetSeconds(timestamp));
     
+    CVPixelBufferRef tempPixelBuffer = pixelBuffer;
+
     // 更新编辑时的预览进度条
     self.progressSlider.value = CMTimeGetSeconds(timestamp);
-    
-    // TuSDK mark
-    self.videoProgress = CMTimeGetSeconds(timestamp) / self.videoTotalTime;
-    NSLog(@"isEditing:%d, timestamp: %f, videoProgress: %f", self.shortVideoEditor.isEditing, CMTimeGetSeconds(timestamp), self.videoProgress);
-    
-    CVPixelBufferRef tempPixelBuffer = pixelBuffer;
-    
-    tempPixelBuffer = [self.filterProcessor syncProcessPixelBuffer:pixelBuffer frameTime:timestamp];
-    [self.filterProcessor destroyFrameData];
-    [self.effectsView.displayView addSegmentViewMoveToLocation:self.videoProgress];
-    self.effectsView.displayView.currentLocation = self.videoProgress;
-    
-    // TuSDK mark - 添加特效时，与预览是两个不同的逻辑，添加过程中返回 NO 特效不会进行切换
-    if ([self.effectTools needSwitchEffectWithProgress:self.videoProgress]) {
-        [self.filterProcessor switchFilterWithCode:[self.effectTools currentEffectCode]];
-    }
     
     return tempPixelBuffer;
 }
 
 - (void)shortVideoEditor:(PLShortVideoEditor *)editor didReadyToPlayForAsset:(AVAsset *)asset timeRange:(CMTimeRange)timeRange {
-    // TuSDK mark
-    self.videoProgress = 0.0;
-    
     [self printTimeRange:timeRange];
-    NSLog(@"%s, videoProgress: %f", __func__, self.videoProgress);
     
     self.playButton.selected = NO;
 }
 
 - (void)shortVideoEditor:(PLShortVideoEditor *)editor didReachEndForAsset:(AVAsset *)asset timeRange:(CMTimeRange)timeRange {
-    // TuSDK mark
-    self.videoProgress = 1.0;
-    
     [self printTimeRange:timeRange];
-    NSLog(@"%s, videoProgress: %f", __func__, self.videoProgress);
-
-    // TuSDK mark - progress 为 1 时，也需要进行 effectCode 判断，因为添加过程中，effectsEndWithCode: 执行之前来限制正在添加的过程中不进行特效切换
-    // TuSDK mark - 添加特效时，与预览是两个不同的逻辑，添加过程中返回 NO 特效不会进行切换
-    if ([self.effectTools needSwitchEffectWithProgress:self.videoProgress]) {
-        [self.filterProcessor switchFilterWithCode:[self.effectTools currentEffectCode]];
-    }
-    
-    NSString *effectCode = self.currentCode;
-//    [self effectsEndWithCode:self.currentCode];
-
-    // 结束视频特效处理
-    self.currentCode = nil;
-    [self.filterProcessor switchFilterWithCode:nil];
-    
-    // 修改结束时间
-    EffectsTimeLineModel *effectModel = self.effectsModels.lastObject;
-    if (effectModel) {
-        effectModel.endProgress = self.videoProgress;
-    }
-    
-    // 结束更新特效 UI
-    [self.effectsView.displayView addSegmentViewEnd];
-    
-    // begin 和 end 成对调用
-    [self.effectTools addEffectEnd:effectCode withProgress:self.videoProgress];
 }
 
 #pragma mark --  PLSAVAssetExportSessionDelegate 合成视频文件给视频数据加滤镜效果的回调
@@ -1193,19 +896,14 @@ PLSVideoEditingControllerDelegate
     // 视频数据可用来做滤镜处理，将滤镜效果写入视频文件中
 //    NSLog(@"%s, line:%d, timestamp:%f", __FUNCTION__, __LINE__, CMTimeGetSeconds(timestamp));
 
-    // TuSDK mark
-    [self managerEffectsWithTimestamp:timestamp];
-    CVPixelBufferRef newPixelBuffer = [self.filterProcessor syncProcessPixelBuffer:pixelBuffer frameTime:timestamp];
-    [self.filterProcessor destroyFrameData];
+    CVPixelBufferRef tempPixelBuffer = pixelBuffer;
     
-    return newPixelBuffer;
+    return tempPixelBuffer;
 }
 
 #pragma mark -- UIButton 按钮响应事件
 #pragma mark -- 滤镜
 - (void)filterButtonClick:(id)sender {
-    [self setEffectsViewHidden];
-    
     if (self.selectionViewIndex == 0) {
         return;
     }
@@ -1215,8 +913,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 配音
 - (void)dubAudioButtonEvent:(id)sender{
-    [self setEffectsViewHidden];
-
     DubViewController *dubViewController = [[DubViewController alloc]init];
     dubViewController.movieSettings = self.movieSettings;
     dubViewController.delegate = self;
@@ -1241,8 +937,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 背景音乐
 - (void)musicButtonClick:(id)sender {
-    [self setEffectsViewHidden];
-
     if (self.selectionViewIndex == 1) {
         return;
     }
@@ -1252,8 +946,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- MV 特效
 - (void)mvButtonClick:(id)sender {
-    [self setEffectsViewHidden];
-
     if (self.selectionViewIndex == 2) {
         return;
     }
@@ -1263,15 +955,11 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 制作Gif图
 - (void)formatGifButtonEvent:(id)sender {
-    [self setEffectsViewHidden];
-
     [self joinGifFormatViewController];
 }
 
 #pragma mark -- 时光倒流
 - (void)reverserButtonEvent:(id)sender {
-    [self setEffectsViewHidden];
-
     [self.shortVideoEditor stopEditing];
     self.playButton.selected = YES;
     
@@ -1324,8 +1012,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 裁剪背景音乐
 - (void)clipMusicButtonEvent:(id)sender {
-    [self setEffectsViewHidden];
-
     CMTimeRange currentMusicTimeRange = CMTimeRangeMake(CMTimeMake([self.audioSettings[PLSStartTimeKey] floatValue] * 1e9, 1e9), CMTimeMake([self.audioSettings[PLSDurationKey] floatValue] * 1e9, 1e9));
     
     PLSClipAudioView *clipAudioView = [[PLSClipAudioView alloc] initWithMuiscURL:self.audioSettings[PLSURLKey] timeRange:currentMusicTimeRange];
@@ -1335,8 +1021,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 音量调节
 - (void)volumeChangeEvent:(id)sender {
-    [self setEffectsViewHidden];
-
     NSNumber *movieVolume = self.movieSettings[PLSVolumeKey];
     NSNumber *musicVolume = self.audioSettings[PLSVolumeKey];
 
@@ -1347,8 +1031,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 关闭原声
 - (void)closeSoundButtonEvent:(UIButton *)button {
-    [self setEffectsViewHidden];
-
     button.selected = !button.selected;
     
     if (button.selected) {
@@ -1361,8 +1043,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 旋转视频
 - (void)rotateVideoButtonEvent:(UIButton *)button {
-    [self setEffectsViewHidden];
-
     AVAsset *asset = self.movieSettings[PLSAssetKey];
     if (![self checkMovieHasVideoTrack:asset]) {
         NSString *errorInfo = @"Error: movie has no videoTrack";
@@ -1377,8 +1057,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 添加文字、图片、涂鸦
 - (void)addTextButtonEvent:(UIButton *)button {
-    [self setEffectsViewHidden];
-    
     AVAsset *asset = self.movieSettings[PLSAssetKey];
     if (![self checkMovieHasVideoTrack:asset]) {
         NSString *errorInfo = @"Error: movie has no videoTrack";
@@ -1405,8 +1083,6 @@ PLSVideoEditingControllerDelegate
 
 #pragma mark -- 视频列表
 - (void)videoListButtonEvent:(UIButton *)button {
-    [self setEffectsViewHidden];
-
     button.selected = !button.selected;
     if (button.selected) {
         [self loadVideoListView];
@@ -1567,9 +1243,6 @@ PLSVideoEditingControllerDelegate
 - (void)nextButtonClick {
     [self.shortVideoEditor stopEditing];
     self.playButton.selected = YES;
-    
-    // TuSDK mark 导出带视频特效的视频时，先重置标记位
-    [self resetExportVideoEffectsMark];
 
     [self loadActivityIndicatorView];
     
@@ -1601,9 +1274,6 @@ PLSVideoEditingControllerDelegate
     __weak typeof(self) weakSelf = self;
     [exportSession setCompletionBlock:^(NSURL *url) {
         NSLog(@"Asset Export Completed");
-
-        // TuSDK mark 视频特效预览，先重置标记位
-        [weakSelf resetPreviewVideoEffectsMark];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf joinNextViewController:url];
@@ -1612,9 +1282,6 @@ PLSVideoEditingControllerDelegate
     
     [exportSession setFailureBlock:^(NSError *error) {
         NSLog(@"Asset Export Failed: %@", error);
-
-        // TuSDK mark 视频特效预览，先重置标记位
-        [weakSelf resetPreviewVideoEffectsMark];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf removeActivityIndicatorView];
