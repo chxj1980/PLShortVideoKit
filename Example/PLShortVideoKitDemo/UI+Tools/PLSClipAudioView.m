@@ -84,6 +84,7 @@
     musicTimeRangeSlider.minimumValue = 0.f;
     musicTimeRangeSlider.maximumValue = CMTimeGetSeconds(self.currentMusicTimeRange.start) + CMTimeGetSeconds(self.currentMusicTimeRange.duration);
     musicTimeRangeSlider.value = CMTimeGetSeconds(self.currentMusicTimeRange.start);
+    musicTimeRangeSlider.continuous = NO;
     [musicTimeRangeSlider addTarget:self action:@selector(sliderValueDidChanged:) forControlEvents:UIControlEventValueChanged];
     [contentView addSubview:musicTimeRangeSlider];
     
