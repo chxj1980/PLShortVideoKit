@@ -17,7 +17,6 @@
 #import "PLSFilterGroup.h"
 #import "PLSViewRecorderManager.h"
 #import "PLSRateButtonView.h"
-#import "EasyarARViewController.h"
 
 // TuSDK mark - 导入
 #import "FilterView.h"
@@ -371,15 +370,6 @@ FilterViewEventDelegate, StickerViewClickDelegate, TuSDKFilterProcessorDelegate
     [self.snapshotButton addTarget:self action:@selector(snapshotButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_snapshotButton];
     
-    // AR
-    UIButton *ARButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 70, 46, 46)];
-    ARButton.layer.cornerRadius = 23;
-    ARButton.backgroundColor = [UIColor colorWithRed:116/255 green:116/255 blue:116/255 alpha:0.55];
-    [ARButton setImage:[UIImage imageNamed:@"easyar_AR"] forState:UIControlStateNormal];
-    ARButton.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-    [ARButton addTarget:self action:@selector(ARButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:ARButton];
-    
     // 加载草稿视频
     self.draftButton = [[UIButton alloc] initWithFrame:CGRectMake(PLS_SCREEN_WIDTH - 60, 130, 46, 46)];
     self.draftButton.layer.cornerRadius = 23;
@@ -509,13 +499,6 @@ FilterViewEventDelegate, StickerViewClickDelegate, TuSDKFilterProcessorDelegate
     importMovieLabel.textAlignment = NSTextAlignmentCenter;
     importMovieLabel.font = [UIFont systemFontOfSize:14.0];
     [self.importMovieView addSubview:importMovieLabel];
-}
-
-#pragma mark - EasyarSDK AR 入口
-- (void)ARButtonOnClick:(id)sender {
-    EasyarARViewController *easyerARViewController = [[EasyarARViewController alloc]init];
-    [easyerARViewController loadARID:@"287e6520eff14884be463d61efb40ba8"];
-    [self presentViewController:easyerARViewController animated:NO completion:nil];
 }
 
 #pragma mark -- Button event

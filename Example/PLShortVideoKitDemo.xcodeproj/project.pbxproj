@@ -374,10 +374,6 @@
 		0A2388032091692800BFE159 /* EffectsTimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2386CA2091692700BFE159 /* EffectsTimeLineModel.m */; };
 		0A2388042091692800BFE159 /* SceneEffectTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2386CB2091692700BFE159 /* SceneEffectTools.m */; };
 		0A2388052091692800BFE159 /* EffectsItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2386CD2091692700BFE159 /* EffectsItemView.m */; };
-		0A238822209170E500BFE159 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A238819209170E500BFE159 /* unzip.c */; };
-		0A238823209170E500BFE159 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A23881A209170E500BFE159 /* zip.c */; };
-		0A238824209170E500BFE159 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A23881B209170E500BFE159 /* ioapi.c */; };
-		0A238825209170E500BFE159 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A23881C209170E500BFE159 /* mztools.c */; };
 		0A24C5E11EE912E500B2314E /* plsmusics.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A24C5D81EE912E500B2314E /* plsmusics.json */; };
 		0A24C5E21EE912E500B2314E /* Road_to_Moscow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A24C5D91EE912E500B2314E /* Road_to_Moscow.mp3 */; };
 		0A24C5ED1EE951B900B2314E /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A24C5EC1EE951B900B2314E /* movie.png */; };
@@ -494,13 +490,6 @@
 		C35043971FBED6B900F9633D /* music_no_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C35043941FBED11C00F9633D /* music_no_selected.png */; };
 		C35043981FBED6B900F9633D /* music_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C35043961FBED11C00F9633D /* music_selected.png */; };
 		C39EA3D71F4E753D0007D1C3 /* PLSRateButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA3D61F4E753D0007D1C3 /* PLSRateButtonView.m */; };
-		C3A78F981F95F61000C3F2D6 /* arScene.js in Resources */ = {isa = PBXBuildFile; fileRef = C3A78F911F95F61000C3F2D6 /* arScene.js */; };
-		C3A78F991F95F61000C3F2D6 /* easyar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78F921F95F61000C3F2D6 /* easyar.framework */; };
-		C3A78F9A1F95F61000C3F2D6 /* easyar3d.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78F931F95F61000C3F2D6 /* easyar3d.framework */; };
-		C3A78F9B1F95F61000C3F2D6 /* PostBasic.effect in Resources */ = {isa = PBXBuildFile; fileRef = C3A78F941F95F61000C3F2D6 /* PostBasic.effect */; };
-		C3A78F9C1F95F61000C3F2D6 /* Recorder.js in Resources */ = {isa = PBXBuildFile; fileRef = C3A78F951F95F61000C3F2D6 /* Recorder.js */; };
-		C3A78F9D1F95F61000C3F2D6 /* Recorder.json in Resources */ = {isa = PBXBuildFile; fileRef = C3A78F961F95F61000C3F2D6 /* Recorder.json */; };
-		C3A78F9E1F95F61000C3F2D6 /* scene.js in Resources */ = {isa = PBXBuildFile; fileRef = C3A78F971F95F61000C3F2D6 /* scene.js */; };
 		C3A78FA11F95F61F00C3F2D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FA01F95F61F00C3F2D6 /* AVFoundation.framework */; };
 		C3A78FA31F95F62600C3F2D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FA21F95F62600C3F2D6 /* CoreGraphics.framework */; };
 		C3A78FA51F95F62D00C3F2D6 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FA41F95F62D00C3F2D6 /* CoreImage.framework */; };
@@ -513,24 +502,10 @@
 		C3A78FB31F95F66200C3F2D6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FB21F95F66200C3F2D6 /* GLKit.framework */; };
 		C3A78FB51F95F66800C3F2D6 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FB41F95F66800C3F2D6 /* JavaScriptCore.framework */; };
 		C3A78FB71F95F67500C3F2D6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A78FB61F95F67500C3F2D6 /* libc++.tbd */; };
-		C3A791151FA02E6500C3F2D6 /* Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A790FE1FA02E6500C3F2D6 /* Auth.m */; };
-		C3A791161FA02E6500C3F2D6 /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791001FA02E6500C3F2D6 /* Downloader.m */; };
-		C3A791171FA02E6500C3F2D6 /* JSONLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791021FA02E6500C3F2D6 /* JSONLoader.m */; };
-		C3A791181FA02E6500C3F2D6 /* SPARApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791041FA02E6500C3F2D6 /* SPARApp.m */; };
-		C3A791191FA02E6500C3F2D6 /* SPARAppCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791061FA02E6500C3F2D6 /* SPARAppCache.m */; };
-		C3A7911A1FA02E6500C3F2D6 /* SPARManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791081FA02E6500C3F2D6 /* SPARManager.m */; };
-		C3A7911B1FA02E6500C3F2D6 /* SPARPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7910A1FA02E6500C3F2D6 /* SPARPackage.m */; };
-		C3A7911C1FA02E6500C3F2D6 /* SPARPreloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7910C1FA02E6500C3F2D6 /* SPARPreloadCache.m */; };
-		C3A7911D1FA02E6500C3F2D6 /* SPARTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7910E1FA02E6500C3F2D6 /* SPARTarget.m */; };
-		C3A7911E1FA02E6500C3F2D6 /* SPARUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791101FA02E6500C3F2D6 /* SPARUtil.m */; };
-		C3A7911F1FA02E6500C3F2D6 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791121FA02E6500C3F2D6 /* SSZipArchive.m */; };
-		C3A791201FA02E6500C3F2D6 /* Unpacker.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791141FA02E6500C3F2D6 /* Unpacker.m */; };
-		C3A791341FA0625700C3F2D6 /* EasyarARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791331FA0625700C3F2D6 /* EasyarARViewController.m */; };
 		C3A791371FA06F3A00C3F2D6 /* PLSLoadAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791361FA06F3A00C3F2D6 /* PLSLoadAnimationView.m */; };
 		C3A791401FA076E000C3F2D6 /* back_white.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A7913F1FA076E000C3F2D6 /* back_white.png */; };
 		C3A791421FA076F300C3F2D6 /* scroll_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A791411FA076F300C3F2D6 /* scroll_image.png */; };
 		C3A791441FA0772D00C3F2D6 /* scan_line.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A791431FA0772D00C3F2D6 /* scan_line.png */; };
-		C3A791471FA077D800C3F2D6 /* ARWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A791461FA077D800C3F2D6 /* ARWebViewController.m */; };
 		C3A7916B1FA1D4ED00C3F2D6 /* easyar_AR.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A7916A1FA1D4ED00C3F2D6 /* easyar_AR.png */; };
 		C3FCBFCB1F305B21007EBB10 /* GifFormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FCBFCA1F305B21007EBB10 /* GifFormatViewController.m */; };
 		C3FCBFCF1F305B37007EBB10 /* PLSFormatGifView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FCBFCE1F305B37007EBB10 /* PLSFormatGifView.m */; };
@@ -1105,15 +1080,6 @@
 		0A2386CB2091692700BFE159 /* SceneEffectTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneEffectTools.m; sourceTree = "<group>"; };
 		0A2386CC2091692700BFE159 /* EffectsDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsDisplayView.h; sourceTree = "<group>"; };
 		0A2386CD2091692700BFE159 /* EffectsItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsItemView.m; sourceTree = "<group>"; };
-		0A238819209170E500BFE159 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		0A23881A209170E500BFE159 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		0A23881B209170E500BFE159 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		0A23881C209170E500BFE159 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		0A23881D209170E500BFE159 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		0A23881E209170E500BFE159 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		0A23881F209170E500BFE159 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		0A238820209170E500BFE159 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		0A238821209170E500BFE159 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
 		0A24C5D81EE912E500B2314E /* plsmusics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = plsmusics.json; path = musics/plsmusics.json; sourceTree = "<group>"; };
 		0A24C5D91EE912E500B2314E /* Road_to_Moscow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Road_to_Moscow.mp3; path = musics/Road_to_Moscow.mp3; sourceTree = "<group>"; };
 		0A24C5EC1EE951B900B2314E /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = movie.png; path = images/movie.png; sourceTree = "<group>"; };
@@ -1267,13 +1233,6 @@
 		C35043961FBED11C00F9633D /* music_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music_selected.png; path = images/music_selected.png; sourceTree = "<group>"; };
 		C39EA3D51F4E753D0007D1C3 /* PLSRateButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSRateButtonView.h; sourceTree = "<group>"; };
 		C39EA3D61F4E753D0007D1C3 /* PLSRateButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSRateButtonView.m; sourceTree = "<group>"; };
-		C3A78F911F95F61000C3F2D6 /* arScene.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = arScene.js; sourceTree = "<group>"; };
-		C3A78F921F95F61000C3F2D6 /* easyar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = easyar.framework; sourceTree = "<group>"; };
-		C3A78F931F95F61000C3F2D6 /* easyar3d.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = easyar3d.framework; sourceTree = "<group>"; };
-		C3A78F941F95F61000C3F2D6 /* PostBasic.effect */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PostBasic.effect; sourceTree = "<group>"; };
-		C3A78F951F95F61000C3F2D6 /* Recorder.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Recorder.js; sourceTree = "<group>"; };
-		C3A78F961F95F61000C3F2D6 /* Recorder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Recorder.json; sourceTree = "<group>"; };
-		C3A78F971F95F61000C3F2D6 /* scene.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = scene.js; sourceTree = "<group>"; };
 		C3A78FA01F95F61F00C3F2D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C3A78FA21F95F62600C3F2D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C3A78FA41F95F62D00C3F2D6 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -1286,39 +1245,11 @@
 		C3A78FB21F95F66200C3F2D6 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		C3A78FB41F95F66800C3F2D6 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		C3A78FB61F95F67500C3F2D6 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		C3A790FD1FA02E6500C3F2D6 /* Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Auth.h; sourceTree = "<group>"; };
-		C3A790FE1FA02E6500C3F2D6 /* Auth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Auth.m; sourceTree = "<group>"; };
-		C3A790FF1FA02E6500C3F2D6 /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
-		C3A791001FA02E6500C3F2D6 /* Downloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Downloader.m; sourceTree = "<group>"; };
-		C3A791011FA02E6500C3F2D6 /* JSONLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONLoader.h; sourceTree = "<group>"; };
-		C3A791021FA02E6500C3F2D6 /* JSONLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONLoader.m; sourceTree = "<group>"; };
-		C3A791031FA02E6500C3F2D6 /* SPARApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARApp.h; sourceTree = "<group>"; };
-		C3A791041FA02E6500C3F2D6 /* SPARApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARApp.m; sourceTree = "<group>"; };
-		C3A791051FA02E6500C3F2D6 /* SPARAppCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARAppCache.h; sourceTree = "<group>"; };
-		C3A791061FA02E6500C3F2D6 /* SPARAppCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARAppCache.m; sourceTree = "<group>"; };
-		C3A791071FA02E6500C3F2D6 /* SPARManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARManager.h; sourceTree = "<group>"; };
-		C3A791081FA02E6500C3F2D6 /* SPARManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARManager.m; sourceTree = "<group>"; };
-		C3A791091FA02E6500C3F2D6 /* SPARPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARPackage.h; sourceTree = "<group>"; };
-		C3A7910A1FA02E6500C3F2D6 /* SPARPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARPackage.m; sourceTree = "<group>"; };
-		C3A7910B1FA02E6500C3F2D6 /* SPARPreloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARPreloadCache.h; sourceTree = "<group>"; };
-		C3A7910C1FA02E6500C3F2D6 /* SPARPreloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARPreloadCache.m; sourceTree = "<group>"; };
-		C3A7910D1FA02E6500C3F2D6 /* SPARTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARTarget.h; sourceTree = "<group>"; };
-		C3A7910E1FA02E6500C3F2D6 /* SPARTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARTarget.m; sourceTree = "<group>"; };
-		C3A7910F1FA02E6500C3F2D6 /* SPARUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPARUtil.h; sourceTree = "<group>"; };
-		C3A791101FA02E6500C3F2D6 /* SPARUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPARUtil.m; sourceTree = "<group>"; };
-		C3A791111FA02E6500C3F2D6 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
-		C3A791121FA02E6500C3F2D6 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		C3A791131FA02E6500C3F2D6 /* Unpacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unpacker.h; sourceTree = "<group>"; };
-		C3A791141FA02E6500C3F2D6 /* Unpacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unpacker.m; sourceTree = "<group>"; };
-		C3A791321FA0625700C3F2D6 /* EasyarARViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyarARViewController.h; sourceTree = "<group>"; };
-		C3A791331FA0625700C3F2D6 /* EasyarARViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyarARViewController.m; sourceTree = "<group>"; };
 		C3A791351FA06F3A00C3F2D6 /* PLSLoadAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSLoadAnimationView.h; sourceTree = "<group>"; };
 		C3A791361FA06F3A00C3F2D6 /* PLSLoadAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSLoadAnimationView.m; sourceTree = "<group>"; };
 		C3A7913F1FA076E000C3F2D6 /* back_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_white.png; path = images/back_white.png; sourceTree = "<group>"; };
 		C3A791411FA076F300C3F2D6 /* scroll_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scroll_image.png; path = images/scroll_image.png; sourceTree = "<group>"; };
 		C3A791431FA0772D00C3F2D6 /* scan_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scan_line.png; path = images/scan_line.png; sourceTree = "<group>"; };
-		C3A791451FA077D800C3F2D6 /* ARWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARWebViewController.h; sourceTree = "<group>"; };
-		C3A791461FA077D800C3F2D6 /* ARWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARWebViewController.m; sourceTree = "<group>"; };
 		C3A7916A1FA1D4ED00C3F2D6 /* easyar_AR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = easyar_AR.png; path = images/easyar_AR.png; sourceTree = "<group>"; };
 		C3FCBFC91F305B21007EBB10 /* GifFormatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifFormatViewController.h; sourceTree = "<group>"; };
 		C3FCBFCA1F305B21007EBB10 /* GifFormatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifFormatViewController.m; sourceTree = "<group>"; };
@@ -1363,9 +1294,7 @@
 				0A0DCA211FB0704A00F1446F /* libswresample.a in Frameworks */,
 				0A0DCA241FB070DC00F1446F /* libbz2.1.0.tbd in Frameworks */,
 				C3A78FA11F95F61F00C3F2D6 /* AVFoundation.framework in Frameworks */,
-				C3A78F991F95F61000C3F2D6 /* easyar.framework in Frameworks */,
 				0A0DCA1A1FB0704A00F1446F /* libavformat.a in Frameworks */,
-				C3A78F9A1F95F61000C3F2D6 /* easyar3d.framework in Frameworks */,
 				0A0DCA1F1FB0704A00F1446F /* libspeexdsp.a in Frameworks */,
 				0A0DCA191FB0704A00F1446F /* libavcodec.a in Frameworks */,
 				F360B89E036039A66815D9FE /* libPods-PLShortVideoKitDemo.a in Frameworks */,
@@ -2003,22 +1932,6 @@
 			path = "TuSDK-viewTool";
 			sourceTree = "<group>";
 		};
-		0A238818209170E500BFE159 /* minizip */ = {
-			isa = PBXGroup;
-			children = (
-				0A238819209170E500BFE159 /* unzip.c */,
-				0A23881A209170E500BFE159 /* zip.c */,
-				0A23881B209170E500BFE159 /* ioapi.c */,
-				0A23881C209170E500BFE159 /* mztools.c */,
-				0A23881D209170E500BFE159 /* crypt.h */,
-				0A23881E209170E500BFE159 /* zip.h */,
-				0A23881F209170E500BFE159 /* unzip.h */,
-				0A238820209170E500BFE159 /* mztools.h */,
-				0A238821209170E500BFE159 /* ioapi.h */,
-			);
-			path = minizip;
-			sourceTree = "<group>";
-		};
 		0A4393731FF662C100608588 /* TuSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2054,7 +1967,6 @@
 				0AF25338201D771800FCD6C8 /* PLShortVideoKit.bundle */,
 				0A0DCA061FB0704A00F1446F /* PLPlayerKit */,
 				0A4393731FF662C100608588 /* TuSDK */,
-				C3A78F901F95F61000C3F2D6 /* EasyARSDK */,
 				0ACE7C281ED8B072002FF4C9 /* UI+Tools */,
 				766CEB88205BD80100F708D7 /* SegmentEffects */,
 				766CEB7F205BD80000F708D7 /* Transition */,
@@ -2064,10 +1976,6 @@
 				0A9435861E6CA2E2008845A3 /* ViewController.m */,
 				0AECA4BE1E88258100AF2931 /* RecordViewController.h */,
 				0AECA4FF1E88A60C00AF2931 /* RecordViewController.m */,
-				C3A791321FA0625700C3F2D6 /* EasyarARViewController.h */,
-				C3A791331FA0625700C3F2D6 /* EasyarARViewController.m */,
-				C3A791451FA077D800C3F2D6 /* ARWebViewController.h */,
-				C3A791461FA077D800C3F2D6 /* ARWebViewController.m */,
 				0A398F6A1ED6259000996229 /* PhotoAlbumViewController.h */,
 				0A398F6B1ED6259000996229 /* PhotoAlbumViewController.m */,
 				0ADCCC63209C041800BC114A /* ViewRecordViewController.h */,
@@ -2338,53 +2246,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C3A78F901F95F61000C3F2D6 /* EasyARSDK */ = {
-			isa = PBXGroup;
-			children = (
-				C3A78F921F95F61000C3F2D6 /* easyar.framework */,
-				C3A78F931F95F61000C3F2D6 /* easyar3d.framework */,
-				C3A78F911F95F61000C3F2D6 /* arScene.js */,
-				C3A78F941F95F61000C3F2D6 /* PostBasic.effect */,
-				C3A78F951F95F61000C3F2D6 /* Recorder.js */,
-				C3A78F961F95F61000C3F2D6 /* Recorder.json */,
-				C3A78F971F95F61000C3F2D6 /* scene.js */,
-				0A238818209170E500BFE159 /* minizip */,
-				C3A790FC1FA02E6500C3F2D6 /* spar */,
-			);
-			path = EasyARSDK;
-			sourceTree = "<group>";
-		};
-		C3A790FC1FA02E6500C3F2D6 /* spar */ = {
-			isa = PBXGroup;
-			children = (
-				C3A790FD1FA02E6500C3F2D6 /* Auth.h */,
-				C3A790FE1FA02E6500C3F2D6 /* Auth.m */,
-				C3A790FF1FA02E6500C3F2D6 /* Downloader.h */,
-				C3A791001FA02E6500C3F2D6 /* Downloader.m */,
-				C3A791011FA02E6500C3F2D6 /* JSONLoader.h */,
-				C3A791021FA02E6500C3F2D6 /* JSONLoader.m */,
-				C3A791031FA02E6500C3F2D6 /* SPARApp.h */,
-				C3A791041FA02E6500C3F2D6 /* SPARApp.m */,
-				C3A791051FA02E6500C3F2D6 /* SPARAppCache.h */,
-				C3A791061FA02E6500C3F2D6 /* SPARAppCache.m */,
-				C3A791071FA02E6500C3F2D6 /* SPARManager.h */,
-				C3A791081FA02E6500C3F2D6 /* SPARManager.m */,
-				C3A791091FA02E6500C3F2D6 /* SPARPackage.h */,
-				C3A7910A1FA02E6500C3F2D6 /* SPARPackage.m */,
-				C3A7910B1FA02E6500C3F2D6 /* SPARPreloadCache.h */,
-				C3A7910C1FA02E6500C3F2D6 /* SPARPreloadCache.m */,
-				C3A7910D1FA02E6500C3F2D6 /* SPARTarget.h */,
-				C3A7910E1FA02E6500C3F2D6 /* SPARTarget.m */,
-				C3A7910F1FA02E6500C3F2D6 /* SPARUtil.h */,
-				C3A791101FA02E6500C3F2D6 /* SPARUtil.m */,
-				C3A791111FA02E6500C3F2D6 /* SSZipArchive.h */,
-				C3A791121FA02E6500C3F2D6 /* SSZipArchive.m */,
-				C3A791131FA02E6500C3F2D6 /* Unpacker.h */,
-				C3A791141FA02E6500C3F2D6 /* Unpacker.m */,
-			);
-			path = spar;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2496,7 +2357,6 @@
 				0A2387112091692700BFE159 /* style_default_2.0_edit_effect_back@3x.png in Resources */,
 				0A9CB4EC1EF042FB00EABA76 /* btn_close_sound@2x.png in Resources */,
 				0A23874F2091692800BFE159 /* style_default_btn_finish_selected@2x.png in Resources */,
-				C3A78F9C1F95F61000C3F2D6 /* Recorder.js in Resources */,
 				0A2387E62091692800BFE159 /* style_default_1.11_btn_back_selected_w@3x.png in Resources */,
 				0A2387192091692700BFE159 /* lsq_filter_thumb_nature.jpg in Resources */,
 				0A2387AE2091692800BFE159 /* style_default_preview_btn_record@2x.png in Resources */,
@@ -2537,7 +2397,6 @@
 				0A2387BE2091692800BFE159 /* style_default_1.5.0_btn_beauty@3x.png in Resources */,
 				0ADCCC73209C04DD00BC114A /* 跳动旋律音效.m4r in Resources */,
 				0A2387A62091692800BFE159 /* lsq_filter_thumb_TinyTimes.jpg in Resources */,
-				C3A78F9B1F95F61000C3F2D6 /* PostBasic.effect in Resources */,
 				0A2386E82091692700BFE159 /* lsq_filter_thumb_Music.jpg in Resources */,
 				0A398F911ED6628500996229 /* cut_bar_left.png in Resources */,
 				0AF33C081F7180D200CCFB42 /* co.mp4 in Resources */,
@@ -2730,7 +2589,6 @@
 				0A2387812091692800BFE159 /* style_default_1.11_btn_edit_recordSound_unselect@3x.png in Resources */,
 				0AF25339201D771800FCD6C8 /* PLShortVideoKit.bundle in Resources */,
 				0A23878E2091692800BFE159 /* style_default_1.11_sound_default@3x.png in Resources */,
-				C3A78F981F95F61000C3F2D6 /* arScene.js in Resources */,
 				0A2387572091692800BFE159 /* style_default_1.7.0_save@3x.png in Resources */,
 				0A2388002091692800BFE159 /* fullScreenSticker.json in Resources */,
 				0A23870F2091692700BFE159 /* style_default_1.6.0_save_btn_default@2x.png in Resources */,
@@ -2752,7 +2610,6 @@
 				0A2386D62091692700BFE159 /* style_default_1.6.0_filter_btn_default@2x.png in Resources */,
 				0A2387352091692700BFE159 /* video_style_default_btn_sticker@2x.png in Resources */,
 				0A2387DA2091692800BFE159 /* style_default_1.7.0_cancel@3x.png in Resources */,
-				C3A78F9E1F95F61000C3F2D6 /* scene.js in Resources */,
 				0A2387B52091692800BFE159 /* style_default_2.0_back_default@3x.png in Resources */,
 				0A2387DB2091692800BFE159 /* style_default_btn_sticker_online@3x.png in Resources */,
 				0A2387CF2091692800BFE159 /* video_style_default_btn_filter@3x.png in Resources */,
@@ -2769,7 +2626,6 @@
 				0A2387F02091692800BFE159 /* style_default_btn_record_b_1.11@2x.png in Resources */,
 				0A2387782091692800BFE159 /* style_default_1.7.1_btn_filter_selected@2x.png in Resources */,
 				0A23879B2091692800BFE159 /* style_default_1.7.0_nosound_selected@2x.png in Resources */,
-				C3A78F9D1F95F61000C3F2D6 /* Recorder.json in Resources */,
 				0A2387732091692800BFE159 /* style_default_btn_flash_on@3x.png in Resources */,
 				0A2387AB2091692800BFE159 /* style_default_1.6.0_sticker_btn_default@3x.png in Resources */,
 				0A2387EF2091692800BFE159 /* lsq_filter_thumb_BabyPink001.jpg in Resources */,
@@ -2956,21 +2812,13 @@
 				766CEBA1205BD85F00F708D7 /* H265MovieViewController.m in Sources */,
 				0A9435871E6CA2E2008845A3 /* ViewController.m in Sources */,
 				0A2386D12091692700BFE159 /* FilterItemView.m in Sources */,
-				C3A7911E1FA02E6500C3F2D6 /* SPARUtil.m in Sources */,
-				0A238825209170E500BFE159 /* mztools.c in Sources */,
 				0A52C1931E9C987900561F37 /* EditViewController.m in Sources */,
-				C3A7911C1FA02E6500C3F2D6 /* SPARPreloadCache.m in Sources */,
-				C3A791471FA077D800C3F2D6 /* ARWebViewController.m in Sources */,
-				C3A7911D1FA02E6500C3F2D6 /* SPARTarget.m in Sources */,
-				C3A7911B1FA02E6500C3F2D6 /* SPARPackage.m in Sources */,
 				0A398F6C1ED6259000996229 /* PhotoAlbumViewController.m in Sources */,
-				C3A791191FA02E6500C3F2D6 /* SPARAppCache.m in Sources */,
 				0AE8AC951F063E3E006166E2 /* PLSClipAudioView.m in Sources */,
 				C39EA3D71F4E753D0007D1C3 /* PLSRateButtonView.m in Sources */,
 				0A2386CF2091692700BFE159 /* StickerScrollView.m in Sources */,
 				766CEB95205BD80100F708D7 /* TransitionModelSelectView.m in Sources */,
 				0A2388022091692800BFE159 /* EffectsDisplayView.m in Sources */,
-				C3A791161FA02E6500C3F2D6 /* Downloader.m in Sources */,
 				0A2388032091692800BFE159 /* EffectsTimeLineModel.m in Sources */,
 				0A9435841E6CA2E2008845A3 /* AppDelegate.m in Sources */,
 				0A9435811E6CA2E2008845A3 /* main.m in Sources */,
@@ -2979,13 +2827,11 @@
 				0A20C1C11FBED85900E98B07 /* UIView+PLSLightFrame.m in Sources */,
 				766CEB97205BD80100F708D7 /* TransitionModelMaker.m in Sources */,
 				766CEB9E205BD80100F708D7 /* PLSClipMulitMediaView.m in Sources */,
-				C3A791151FA02E6500C3F2D6 /* Auth.m in Sources */,
 				766CEB9C205BD80100F708D7 /* BaseViewController.m in Sources */,
 				0A2386CE2091692700BFE159 /* FilterView.m in Sources */,
 				0A20C1E41FBEE0C800E98B07 /* PLSColorPicker.m in Sources */,
 				0A26041B1FA80BC900609411 /* DubViewController.m in Sources */,
 				0A63402A1F15C9C9005ADF6C /* MovieTransCodeViewController.m in Sources */,
-				C3A791201FA02E6500C3F2D6 /* Unpacker.m in Sources */,
 				0A20C1E61FBEE0C800E98B07 /* PLSStickerBar.m in Sources */,
 				0A694C571FE3774B00E2BA60 /* PLSColumnListView.m in Sources */,
 				0A2388012091692800BFE159 /* EffectsView.m in Sources */,
@@ -2998,11 +2844,8 @@
 				0ACE7C381ED8B072002FF4C9 /* PLSEditVideoCell.m in Sources */,
 				0A20C1E71FBEE0C800E98B07 /* PLSTextBar.m in Sources */,
 				0A534EAB200E27F10032A981 /* PLSViewRecorderManager.m in Sources */,
-				0A238822209170E500BFE159 /* unzip.c in Sources */,
 				0ACE7C371ED8B072002FF4C9 /* PLSDeleteButton.m in Sources */,
-				C3A7911F1FA02E6500C3F2D6 /* SSZipArchive.m in Sources */,
 				766CEB99205BD80100F708D7 /* MulitClipViewController.m in Sources */,
-				C3A791171FA02E6500C3F2D6 /* JSONLoader.m in Sources */,
 				C3FCBFCF1F305B37007EBB10 /* PLSFormatGifView.m in Sources */,
 				0ACE7C391ED8B072002FF4C9 /* PLSProgressBar.m in Sources */,
 				766CEB9D205BD80100F708D7 /* PLSPlayerView.m in Sources */,
@@ -3012,16 +2855,11 @@
 				0A398F701ED625DD00996229 /* ClipMovieViewController.m in Sources */,
 				C3A791371FA06F3A00C3F2D6 /* PLSLoadAnimationView.m in Sources */,
 				0ADCCC65209C041800BC114A /* ViewRecordViewController.m in Sources */,
-				0A238824209170E500BFE159 /* ioapi.c in Sources */,
-				0A238823209170E500BFE159 /* zip.c in Sources */,
 				0A06B0BD1F123299003CA0F6 /* PLSFilterGroup.m in Sources */,
-				C3A7911A1FA02E6500C3F2D6 /* SPARManager.m in Sources */,
 				0ACE7C361ED8B072002FF4C9 /* PLSClipMovieView.m in Sources */,
 				0A2386D02091692700BFE159 /* StickerCollectionViewCell.m in Sources */,
 				0ACE7C3A1ED8B072002FF4C9 /* UIImage+PLSClip.m in Sources */,
-				C3A791181FA02E6500C3F2D6 /* SPARApp.m in Sources */,
 				0A6340311F15E8CC005ADF6C /* PLSSelectionView.m in Sources */,
-				C3A791341FA0625700C3F2D6 /* EasyarARViewController.m in Sources */,
 				766CEB96205BD80100F708D7 /* TransitionViewController.m in Sources */,
 				0A20C1E81FBEE0C800E98B07 /* PLSToolBarCommon.m in Sources */,
 			);
