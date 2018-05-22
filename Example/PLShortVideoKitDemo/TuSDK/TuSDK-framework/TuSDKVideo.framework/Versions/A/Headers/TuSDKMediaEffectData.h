@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TuSDKTimeRange.h"
+#import "TuSDKMediaEffectData.h"
 
 
 /**

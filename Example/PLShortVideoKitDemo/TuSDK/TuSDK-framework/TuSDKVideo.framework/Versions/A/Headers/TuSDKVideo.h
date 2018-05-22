@@ -18,15 +18,6 @@
 #import "TuSDKFilterConfigProtocol.h"
 #import "TuSDKFilterConfigViewBase.h"
 #import "TuSDKMovieEditor.h"
-#import "TuSDKVideoImageExtractor.h"
-
-#import "TuSDKTSAudioMixer.h"
-#import "TuSDKTSMovieMixer.h"
-#import "TuSDKTSMovieSplicer.h"
-#import "TuSDKMovieClipper.h"
-#import "TuSDKTSAudioRecorder.h"
-#import "TuSDKTSMovieCompresser.h"
-
 #import "TuSDKVideoResult.h"
 #import "TuSDKAudioResult.h"
 #import "TuSDKMoiveFragment.h"
@@ -34,6 +25,18 @@
 #import "TuSDKMediaAudioEffectData.h"
 #import "TuSDKMediaStickerAudioEffectData.h"
 #import "TuSDKMVStickerAudioEffectData.h"
+
+// API
+
+#import "TuSDKAssetVideoComposer.h"
+#import "TuSDKTSAudioMixer.h"
+#import "TuSDKTSMovieMixer.h"
+#import "TuSDKTSMovieSplicer.h"
+#import "TuSDKMovieClipper.h"
+#import "TuSDKTSAudioRecorder.h"
+#import "TuSDKTSMovieCompresser.h"
+#import "TuSDKVideoImageExtractor.h"
+
 
 /** Video版本号 */
 extern NSString * const lsqVideoVersion;

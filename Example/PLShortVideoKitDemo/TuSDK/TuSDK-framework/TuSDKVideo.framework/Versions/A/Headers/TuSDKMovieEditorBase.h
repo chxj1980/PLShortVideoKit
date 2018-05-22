@@ -14,6 +14,7 @@
 #import "TuSDKMVStickerAudioEffectData.h"
 #import "TuSDKMediaSceneEffectData.h"
 #import "TuSDKMovieEditorMode.h"
+
 /**
  *  视频编辑基类
  */
@@ -86,6 +87,16 @@
 @property (readonly,assign) lsqMovieEditorStatus status;
 
 /**
+ * 设置播放模式，默认正序播放
+ */
+@property (nonatomic,assign) lsqMovieEditorPlayMode playMode;
+
+/**
+ * 当前设置的时间特效 默认： lsqMovieEditorTimeEffectModeNone
+ */
+@property (nonatomic,readonly) lsqMovieEditorTimeEffectMode timeEffectMode;
+
+/**
  *  导出视频的文件格式（默认:lsqFileTypeMPEG4）
  */
 @property (nonatomic, assign) lsqFileType fileType;
@@ -94,12 +105,6 @@
  *  预览时视频原音音量， 默认 1.0  注：仅在 option 中的 enableSound 为 YES 时有效
  */
 @property (nonatomic, assign) CGFloat videoSoundVolume;
-
-/**
- *  场景特效设置数组  注：处理一个视频时，只能单独使用滤镜，或单独使用场景特效，或单独使用粒子特效    例如：添加场景特效后，设置滤镜，则场景特效不生效
- */
-@property (nonatomic, strong) NSArray<TuSDKMediaSceneEffectData *> *sceneEffects __attribute__((deprecated("即将过期, 用addEffectWithCode: withMode:替换")));
-
 /**
  *  设置生效的特效模式  注：滤镜、场景特效、粒子特效不能同时添加，当 EfficientEffectMode 为Default时 以后添加的特效为准，当Mode进行限定时，则以限定的模式为准
  */
@@ -143,6 +148,17 @@
  *  停止预览
  */
 - (void) stopPreview;
+
+/**
+ * 停止并重新开始预览
+ * 如果你需要 stopPreView 紧接着使用 startPreView 再次启动预览，你首选的方案应为 rePreview，rePreview会根据内部状态在合适的时间启动预览
+ */
+- (void) rePreview;
+
+/**
+ * 暂停预览
+ */
+- (void) pausePreView;
 
 /**
  *  是否正在预览视频
@@ -215,16 +231,20 @@
 #pragma mark - media effect
 
 /**
+ 设置时间特效模式
+
+ @param timeEffectMode 时间特效模式
+ @param atTimeRange 特效生效时间
+ @param times 特效次数
+ */
+- (void)setTimeEffectMode:(lsqMovieEditorTimeEffectMode)timeEffectMode atTimeRange:(TuSDKTimeRange *)timeRange times:(NSUInteger)times;
+
+/**
  添加一个多媒体特效 (MV、配音中使用)
 
  @param effect 特效对象，需使用 MV 或 配音 对应的 TuSDKMediaEffectData 的子类
  */
 - (void)addMediaEffect:(TuSDKMediaEffectData *)effect;
-
-/**
- 移除所有特效 (MV、配音中使用)
- */
-- (void)removeAllEffect  __attribute__((deprecated("已过期, 用removeAllMediaEffect替换")));
 
 /**
  移除所有特效 (MV、配音中使用)
